@@ -64,4 +64,20 @@ export class LinkedList<T> {
 
         this.tailNode = newTailNode;
     }
+
+    indexOf(value: T): number {
+        let listElement = this.headNode,
+            index = 0;
+
+        while (listElement) {
+            if (listElement.value === value) {
+                return index;
+            }
+
+            listElement = listElement.next;
+            index++;
+        }
+
+        return -1;
+    }
 }
