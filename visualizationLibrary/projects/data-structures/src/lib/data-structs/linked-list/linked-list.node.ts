@@ -6,4 +6,12 @@ export class LinkedListNode<T> {
         this.value = value;
         this.next = null;
     }
+
+    hasNext(): boolean {
+        if (this.next) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
