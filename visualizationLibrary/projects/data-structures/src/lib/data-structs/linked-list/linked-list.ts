@@ -39,7 +39,7 @@ export class LinkedList<T> {
         return null;
     }
 
-    addFirst(value: T) {
+    addFirst(value: T): void {
         const newHeadNode = new LinkedListNode<T>(value);
 
         if (this.headNode) {
@@ -52,7 +52,7 @@ export class LinkedList<T> {
         this.headNode = newHeadNode;
     }
 
-    addLast(value: T) {
+    addLast(value: T): void {
         const newTailNode = new LinkedListNode<T>(value);
 
         if (this.tailNode) {
@@ -79,5 +79,60 @@ export class LinkedList<T> {
         }
 
         return -1;
+    }
+
+    lastIndexOf(value: T): number {
+        let listElement = this.headNode,
+            index = 0,
+            result = -1;
+
+        while (listElement) {
+            if (listElement.value === value) {
+                result = index;
+            }
+
+            listElement = listElement.next;
+            index++;
+        }
+
+        return result;
+    }
+
+    removeElementByIndex(index: number): boolean {
+        let node = this.headNode,
+            previousNode = null,
+            nodeForRemove = null,
+            nextNode = null;
+
+        for (let i = 0; i <= index + 1; i++) {
+            if (i === index - 1) {
+                previousNode = node;
+            }
+            if (i === index) {
+                nodeForRemove = node;
+            }
+            if (i === index + 1) {
+                nextNode = node;
+            }
+
+            node = node ? node.next : null;
+        }
+
+        if (previousNode && nextNode) {
+            previousNode.next = nextNode;
+        } else if (!previousNode && nextNode) {
+            this.headNode = nextNode;
+        } else if (previousNode && !nextNode) {
+            console.log('previousNode && !nextNode', previousNode);
+            previousNode.next = null;
+            this.tailNode = previousNode;
+        } else if (!previousNode && !nextNode) {
+            this.headNode = null;
+            this.currentNode = null;
+            this.tailNode = null;
+        }
+
+        nodeForRemove.next = null;
+        return true;
     }
 }

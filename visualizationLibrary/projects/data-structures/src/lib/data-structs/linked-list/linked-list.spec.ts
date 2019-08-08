@@ -91,4 +91,83 @@ describe('LinkedList', () => {
         expect(linkedList.indexOf(5)).toBe(-1);
     });
 
+    it('lastIndexOf', () => {
+        linkedList.addLast(1);
+        linkedList.addLast(2);
+        linkedList.addLast(3);
+        linkedList.addLast(4);
+        linkedList.addLast(1);
+        linkedList.addLast(2);
+        linkedList.addLast(3);
+        linkedList.addLast(4);
+
+        expect(linkedList.lastIndexOf(1)).toBe(4);
+        expect(linkedList.lastIndexOf(2)).toBe(5);
+        expect(linkedList.lastIndexOf(3)).toBe(6);
+        expect(linkedList.lastIndexOf(4)).toBe(7);
+        expect(linkedList.lastIndexOf(5)).toBe(-1);
+    });
+
+    it('removeElementByIndex: normal case, element from middle', () => {
+        linkedList.addLast(1);
+        linkedList.addLast(2);
+        linkedList.addLast(3);
+        linkedList.addLast(4);
+        linkedList.addLast(1);
+        linkedList.addLast(2);
+        linkedList.addLast(3);
+        linkedList.addLast(4);
+
+        expect(linkedList.lastIndexOf(1)).toBe(4);
+        expect(linkedList.lastIndexOf(2)).toBe(5);
+        expect(linkedList.lastIndexOf(3)).toBe(6);
+        expect(linkedList.lastIndexOf(4)).toBe(7);
+        expect(linkedList.lastIndexOf(5)).toBe(-1);
+    });
+
+    it('removeElementByIndex: element from middle', () => {
+        linkedList.addLast(1);
+        linkedList.addLast(2);
+        linkedList.addLast(3);
+        linkedList.addLast(4);
+
+        expect(linkedList.removeElementByIndex(2)).toBe(true);
+
+        linkedList.moveCurrentNodeToHead();
+
+        expect(linkedList.getCurrentValue()).toBe(1);
+        expect(linkedList.next()).toBe(2);
+        expect(linkedList.next()).toBe(4);
+    });
+
+    it('removeElementByIndex: element from beginning', () => {
+        linkedList.addLast(1);
+        linkedList.addLast(2);
+        linkedList.addLast(3);
+        linkedList.addLast(4);
+
+        expect(linkedList.removeElementByIndex(0)).toBe(true);
+
+        linkedList.moveCurrentNodeToHead();
+
+        expect(linkedList.getCurrentValue()).toBe(2);
+        expect(linkedList.next()).toBe(3);
+        expect(linkedList.next()).toBe(4);
+    });
+
+    it('removeElementByIndex: element from ending', () => {
+        linkedList.addLast(1);
+        linkedList.addLast(2);
+        linkedList.addLast(3);
+        linkedList.addLast(4);
+
+        expect(linkedList.removeElementByIndex(3)).toBe(true);
+
+        linkedList.moveCurrentNodeToHead();
+
+        expect(linkedList.getCurrentValue()).toBe(1);
+        expect(linkedList.next()).toBe(2);
+        expect(linkedList.next()).toBe(3);
+        expect(linkedList.next()).toBe(null);
+    });
 });
